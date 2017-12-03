@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Homepage</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body style="padding: 2%">
+  <main>
+    <a href="/">Homepage</a>
+    <a href="/cart">Cart</a>
+    <div>
+      <form action="/product/">
+        <input type="text" name="name" id="searchBar" pattern="[a-zA-Z\s]+"
+        title="Only A-Z, a-z, space with maximum of 50 characters"
+        maxlength="50" onkeyup="recommend(this.value)">
+        <input type="submit" value="Search">
+      </form>
+      <p><a id="searchSuggest1"></a></p>
+      <p><a id="searchSuggest2"></a></p>
+      <p><a id="searchSuggest3"></a></p>
+      <p><a id="searchSuggest4"></a></p>
+      <p><a id="searchSuggest5"></a></p>
+    </div>
+    <h3>Featured Products</h3>
+    <div>
+      <table>
+        <tr>
+          <td></td>
+          <td>
+            Product
+          </td>
+          <td>
+            Unit price
+          </td>
+        </tr>
+        <% products.forEach((product) => { %>
+
+        <tr>
+          <td>
+            <button onclick="addToCart(<%= product[0] %>, '<%= product[1] %>')">+</button>
+          </td>
+          <td>
+            <a href="/product/<%= product[0] %>" style="text-decoration: none !important;">
+              <strong><%= product[1] %>: </strong>
+            </a>
+          </td>
+          <td>
+            <%= parseInt(product[2]).toLocaleString() %> đ
+          </td>
+        </tr>
+        <% }) %>
+
+      </table>
+
+    </div>
+  </main>
+  <script type="text/javascript" src='/api/clientJS/productSearch'></script>
+  <script type="text/javascript" src='/api/clientJS/cartHandler'></script>
+  <script type="text/javascript" src='/api/clientJS/cookieHandler'></script>
+</body>
+</html>

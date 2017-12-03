@@ -1,0 +1,48 @@
+.main-content {
+  margin: 0 50px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+/**************** style for jgrowl ****************/
+.jgrowl-success{
+    background-color: green !important;
+}
+
+.jgrowl-fail{
+    background-color: red !important;
+}
+
+/*************** header style **********************/
+#logout-button {
+  display: none;
+}
+
+/************* modal ****************/
+.modal-footer > button {
+  float: right;
+  margin: 0 10px;
+}
+
+.modal-body > .row {
+  margin: 5px 0;
+}
+
+.card {
+  border: 1px solid rgb(204, 204, 204);
+  display: inline-block;
+}
+.card-title {
+  width: 100%; 
+  text-align: center; 
+}
+
+.card-img-top {
+  width: 100px;
+  height: auto;
+  left: 50%;
+  position: relative;
+  margin-left: -50px;
+}

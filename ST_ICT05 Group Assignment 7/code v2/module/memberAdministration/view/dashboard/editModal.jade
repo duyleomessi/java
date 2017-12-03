@@ -1,0 +1,38 @@
+div.
+  <!-- Modal -->
+  <div class="modal fade" id="edit-modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit user</h4>
+        </div>
+        <div class="modal-body edit-modal">
+          <div class="row no-margin">
+            <label class="col-xs-4" for="email">Name:</label>
+            <input class="col-xs-8" type="email" name="name" value="">
+          </div>
+          <div class="row no-margin">
+            <label class="col-xs-4" for="email">Email address:</label>
+            <input class="col-xs-8" type="email" name="email" value="">
+          </div>
+          <div class="row no-margin">
+            <label class="col-xs-4" for="email">Password:</label>
+            <input class="col-xs-8" type="passowrd" name="password" value="">
+          </div>
+          <div class="row no-margin">
+            <label class="col-xs-4">Role:</label>
+            <input type="checkbox" id="admin-checkbox" name="admin" value="admin">
+            <label for="is_admin">Admin</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="update-button">Update</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

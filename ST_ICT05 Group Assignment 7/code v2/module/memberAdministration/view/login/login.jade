@@ -1,0 +1,28 @@
+extend ../layout/layout
+block title
+  title !{title}
+block css_files
+  link(rel='stylesheet', href='/static/css/login-signup.css')
+block content
+  .login-container
+      div(class="login-title")
+        !{title}
+      div(class="form-container")
+          if (title == "Sign up")
+            .row.no-margin.
+              <label class="col-xs-4" for="email">Name:</label>
+              <input class="col-xs-8" type="text" id="name" name="name" value="">
+          .row.no-margin.
+              <label class="col-xs-4" for="email">Email address:</label>
+              <input class="col-xs-8" type="email" id="email" name="email" value="">
+          .row.no-margin.
+              <label class="col-xs-4" for="email">Password:</label>
+              <input class="col-xs-8" type="password" id="password" name="password">
+          .row.no-margin.center-button-container.
+              <button class="login-button" type="submit">
+                  !{title}
+              </button>
+          .row.no-margin.center-button-container.
+              <a href="!{next_link}">or !{text_of_link}</a>
+block script_files
+  script(src="#{script}")

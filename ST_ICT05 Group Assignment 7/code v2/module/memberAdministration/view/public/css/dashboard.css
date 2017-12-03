@@ -1,0 +1,53 @@
+.dashboard-container {
+    width: 850px;
+    margin: 0 auto;
+}
+
+.dashboard-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.new-button-hoder {
+    padding: 20px 0px;
+}
+
+.new-button-hoder > button {
+    float: right;
+    background-color: green;
+    color: white;
+}
+
+.function-button-holder {
+    text-align: center;
+}
+
+.function-button-holder > button {
+    margin: 0px 5px;
+    border: none;
+    color: white;
+    font-size: 15px;
+}
+
+.edit-button {
+    background-color: green;
+}
+
+.delete-button {
+    background-color: red;
+}
+
+.row-data {
+    padding: 5px 0px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.row-data:first-child {
+    border-top: 1px solid #cccccc;
+    font-weight: bold;
+}
+
+.error-row {
+  text-align: center;
+  color: red;
+}
