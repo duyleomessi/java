@@ -1,0 +1,18 @@
+package example.binarylight;
+
+
+import org.fourthline.cling.UpnpService;
+import org.fourthline.cling.UpnpServiceImpl;
+import org.fourthline.cling.binding.*;
+import org.fourthline.cling.binding.annotations.*;
+import org.fourthline.cling.model.*;
+import org.fourthline.cling.model.meta.*;
+import org.fourthline.cling.model.types.*;
+
+
+public class BinaryLightServer implements Runnable {
+	public static void main(String[] args) throws Exception {
+		// Start a user thread that runs the UPnP stack
+		Thread serverThread = new 
+	}
+}
