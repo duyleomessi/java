@@ -1,5 +1,0 @@
-package example.blight;
-
-public class BinaryLightServer implements Runable {
-
-}
