@@ -1,18 +1,16 @@
 package view;
 
-import app.TemperatureSensorApp;
+import app.AirConditionerApp;
 import device.Device;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
-public class TemperatureSensorView {
+public class AirConditionerView {
     @FXML
     private TextField currentTemp;
     
@@ -23,18 +21,20 @@ public class TemperatureSensorView {
     @FXML
     private ComboBox comboBox;
 
-    private ObservableList<String> tempSensorDeviceIds = FXCollections.observableArrayList();
+    private ObservableList<String> AirConditionerDeviceIds = FXCollections.observableArrayList();
     private final ToggleGroup toggleGroup = new ToggleGroup();
-    private TemperatureSensorApp app;
+    private AirConditionerApp app;
 
     private static final String STATE_AVAILABLE = "available";
     private static final String STATE_UNAVAILABLE = "unavailable";
 
     @FXML
     private void initialize() {
-        // ComboBox
-        comboBox.setItems(tempSensorDeviceIds);
+//        currentTemp.setText("18");
         
+        // ComboBox
+        comboBox.setItems(AirConditionerDeviceIds);
+
         // Radio Button
         availableBut.setUserData(STATE_AVAILABLE);
         unavailableBut.setUserData(STATE_UNAVAILABLE);
@@ -52,33 +52,37 @@ public class TemperatureSensorView {
                     status = false;
                 }
 
-                app.setTempSensorState(status);
+                app.setAirCState(status);
             }
         });
         
         currentTemp.textProperty().addListener((observable, oldValue, newValue) -> {
-            app.setTempSensorTempAction(newValue);
+            app.setAirConditionTemperature(newValue);
         });
+        
+//        currentTemp.textProperty().bind(observable);
+        
+//        app.setAirConditionTemperature(currentTemp.getText());
     }
 
     @FXML
-    private void onSelectSensor() {
+    private void onSelectAirConditioner() {
         String selectedStr = comboBox.getValue().toString();
-        selectedStr = selectedStr.replace("Temp", "");
+        selectedStr = selectedStr.replace("AirC", "");
         int selectedIndex = Integer.valueOf(selectedStr);
         app.setCurrentDevice(selectedIndex);
         System.out.println("Select sensor " + selectedIndex);
     }
-    
-    public void populateTempSensorList(Device[] devices)
+
+    public void populateAirCList(Device[] devices)
     {
         for (Device device : devices)
         {
-            tempSensorDeviceIds.add(device.getId());
+            AirConditionerDeviceIds.add(device.getId());
         }
     }
 
-    public void updateSensorStatusUI(boolean status)
+    public void updateStatusUI(boolean status)
     {
         if(!status)
         {
@@ -95,7 +99,7 @@ public class TemperatureSensorView {
         currentTemp.setText(temp);
     }
 
-    public void setApp(TemperatureSensorApp app) {
+    public void setApp(AirConditionerApp app) {
         this.app = app;
     }
 }

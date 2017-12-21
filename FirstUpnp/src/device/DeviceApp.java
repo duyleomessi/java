@@ -55,7 +55,7 @@ public abstract class DeviceApp extends Application {
      * Create upnp devices
      */
     private void createDevices(int amount, String prefix, String type, String description, Class deviceClass) {
-        // Create slot devices
+        // Create devices
         devices = new Device[amount];
         for (int i = 0; i < amount; ++i) {
             // Create device model

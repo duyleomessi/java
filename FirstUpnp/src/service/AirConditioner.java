@@ -6,14 +6,14 @@ import org.fourthline.cling.model.ModelUtil;
 import java.beans.PropertyChangeSupport;
 
 @UpnpService(
-        serviceId = @UpnpServiceId("TemperatureSensor"),
-        serviceType = @UpnpServiceType(value = "TemperatureSensor", version = 1)
+        serviceId = @UpnpServiceId("AirConditioner"),
+        serviceType = @UpnpServiceType(value = "AirConditioner", version = 1)
 )
 
-public class TemperatureSensor {
+public class AirConditioner {
     private final PropertyChangeSupport propertyChangeSupport;
 
-    public TemperatureSensor() {
+    public AirConditioner() {
         propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
@@ -22,14 +22,14 @@ public class TemperatureSensor {
     }
 
     @UpnpStateVariable(defaultValue = "0")
-    private String id;
+    private String id = "0";
 
     @UpnpStateVariable(defaultValue = "0")
-    private boolean status = false; 
-    
-    @UpnpStateVariable(defaultValue = "18")
-    private double temperature; 
+    private boolean status = false;
 
+    @UpnpStateVariable(defaultValue = "20")
+    private double temperature;
+    
     @UpnpAction
     public void setId(@UpnpInputArgument(name = "NewId") String newId) {
         id = newId;
@@ -47,12 +47,12 @@ public class TemperatureSensor {
         getPropertyChangeSupport().firePropertyChange("Temperature", null, null);
     }
 
-    @UpnpAction(out = @UpnpOutputArgument(name = "ResultTempStatus"))
+    @UpnpAction(out = @UpnpOutputArgument(name = "ResultAirStatus"))
     public boolean getStatus() {
         return status;
     }
 
-    @UpnpAction(out = @UpnpOutputArgument(name = "ResultTempId"))
+    @UpnpAction(out = @UpnpOutputArgument(name = "ResultAirId"))
     public String getId() {
         return id;
     }

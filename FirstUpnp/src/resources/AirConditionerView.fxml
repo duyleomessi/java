@@ -7,19 +7,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="325.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TemperatureSensorView">
+<AnchorPane prefHeight="321.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AirConditionerView">
    <children>
-      <ComboBox fx:id="comboBox" layoutX="164.0" layoutY="75.0" onAction="#onSelectSensor" prefWidth="150.0" />
+      <ComboBox fx:id="comboBox" layoutX="164.0" layoutY="75.0" onAction="#onSelectAirConditioner" prefWidth="150.0" />
       <Label layoutX="64.0" layoutY="80.0" text="Device Id" />
       <RadioButton fx:id="availableBut" layoutX="160.0" layoutY="138.0" mnemonicParsing="false" text="Available" />
       <RadioButton fx:id="unavailableBut" layoutX="160.0" layoutY="183.0" mnemonicParsing="false" text="Unavailable" />
       <Label layoutX="64.0" layoutY="139.0" text="Status" />
-      <Label layoutX="24.0" layoutY="16.0" text="Temperature Sensors" textAlignment="CENTER">
+      <Label layoutX="24.0" layoutY="16.0" text="Air Conditioners" textAlignment="CENTER">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label layoutX="60.0" layoutY="231.0" text="Current Temperature" />
-      <TextField fx:id="currentTemp" layoutX="208.0" layoutY="226.0" prefHeight="31.0" prefWidth="110.0" />
+      <Label layoutX="62.0" layoutY="221.0" text="Current Temperature" />
+      <TextField fx:id="currentTemp" layoutX="212.0" layoutY="216.0" prefHeight="31.0" prefWidth="122.0" />
    </children>
 </AnchorPane>

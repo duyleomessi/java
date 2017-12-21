@@ -1,11 +1,11 @@
 package app;
 
-import action.SetTemperatureSensorTempAction;
-import action.SetTempSensorStatusAction;
+import action.SetAirConditionerStatusAction;
+import action.SetAirConditionerTempAction;
 import device.Device;
 import device.DeviceApp;
-import service.TemperatureSensor;
-import view.TemperatureSensorView;
+import service.AirConditioner;
+import view.AirConditionerView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -22,11 +22,12 @@ import org.fourthline.cling.model.state.StateVariableValue;
 import java.io.IOException;
 import java.util.Map;
 import javafx.application.Platform;
+import org.fourthline.cling.model.message.header.STAllHeader;
 
-public class TemperatureSensorApp extends DeviceApp {
+public class AirConditionerApp extends DeviceApp {
     private final int NUMBER_DEVICES = 2;
     private Device currentDevice;
-    private TemperatureSensorView temperatureSensorViewController;
+    private AirConditionerView airConditionerViewController;
 
     public static void main(String[] args) {
         launch(args);
@@ -35,32 +36,30 @@ public class TemperatureSensorApp extends DeviceApp {
     @Override
     public void start(Stage primaryStage) throws Exception {
         super.start(primaryStage);
-        primaryStage.setTitle("Temperature Sensors");
-        initializeDevices(NUMBER_DEVICES, "Temp", "TemperatureSensor", "Using for sense Temperature", TemperatureSensor.class);
-        // Set id for services
-        setServiceIds("TemperatureSensor");
-        
+        primaryStage.setTitle("Air Conditioner");
+        initializeDevices(NUMBER_DEVICES, "AirC", "AirConditioner", "Using control AirConditioner", AirConditioner.class);
         initializeRootLayout();
+        // Set id for services
+        setServiceIds("AirConditioner");
 
         // Populate combobox id options
-        temperatureSensorViewController.populateTempSensorList(devices);
+        airConditionerViewController.populateAirCList(devices);
     }
 
     @Override
     public void onPropertyChangeCallbackReceived(GENASubscription subscription) {
         Map<String, StateVariableValue> values = subscription.getCurrentValues();
         StateVariableValue idVar = values.get("Id");
-        
+
         if (idVar != null) {
             String id = (String) idVar.getValue();
-            System.out.println(id);
             // Only update current selected device
             if (id.equals(currentDevice.getId())) {
                 StateVariableValue status = values.get("Status");
                 StateVariableValue temp = values.get("Temperature");
-                System.out.println("Sensor App Status change " + (boolean)status.getValue());
-                temperatureSensorViewController.updateSensorStatusUI((boolean) status.getValue());
-                temperatureSensorViewController.updateTempUI(temp.getValue().toString());
+                System.out.println("AirC Status change " + (boolean)status.getValue());
+                airConditionerViewController.updateStatusUI((boolean) status.getValue());
+                airConditionerViewController.updateTempUI(temp.getValue().toString());
             }
         }
     }
@@ -69,7 +68,7 @@ public class TemperatureSensorApp extends DeviceApp {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../resources/TemperatureSensorView.fxml"));
+            loader.setLocation(getClass().getResource("../resources/AirConditionerView.fxml"));
             AnchorPane rootLayout = loader.load();
 
             // Show the scene containing the root layout.
@@ -78,8 +77,8 @@ public class TemperatureSensorApp extends DeviceApp {
             primaryStage.show();
 
             // Set app reference for controller
-            temperatureSensorViewController = loader.getController();
-            temperatureSensorViewController.setApp(this);
+            airConditionerViewController = loader.getController();
+            airConditionerViewController.setApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,7 +91,7 @@ public class TemperatureSensorApp extends DeviceApp {
      */
     public void setCurrentDevice(int index) {
         currentDevice = devices[index];
-        Service service = getService(currentDevice.getDevice(), "TemperatureSensor");
+        Service service = getService(currentDevice.getDevice(), "AirConditioner");
 
         if (service != null) {
             initializePropertyChangeCallback(upnpService, service);
@@ -100,32 +99,32 @@ public class TemperatureSensorApp extends DeviceApp {
     }
 
     /**
-     * Set status value of current selected sensor
+     * Set status value of current selected air conditioner
      *
      * @param state
      */
-    public void setTempSensorState(boolean state) {
-        Service service = getService(currentDevice.getDevice(), "TemperatureSensor");
+    public void setAirCState(boolean state) {
+        Service service = getService(currentDevice.getDevice(), "AirConditioner");
 
         if (service != null) {
-            executeAction(upnpService, new SetTempSensorStatusAction(service, state));
+            executeAction(upnpService, new SetAirConditionerStatusAction(service, state));
         }
     }
     
-    public void setTempSensorTempAction(String tempS) {
-        Service service = getService(currentDevice.getDevice(), "TemperatureSensor");
+    public void setAirConditionTemperature(String tempS) {
+        Service service = getService(currentDevice.getDevice(), "AirConditioner");
         
         if (service != null && tempS != null && tempS.matches("[-+]?\\d*\\.?\\d+")) {
             double temp = Double.parseDouble(tempS);
-            executeAction(upnpService, new SetTemperatureSensorTempAction(service, temp));
+            executeAction(upnpService, new SetAirConditionerTempAction(service, temp));
         }
     }
 
     /**
-     * Get status value from current selected sensor
+     * Get status value from current selected air conditioner
      */
-    public void getTempSensorStatus() {
-        Service service = getService(currentDevice.getDevice(), "TemperatureSensor");
+    public void getAirCStatus() {
+        Service service = getService(currentDevice.getDevice(), "AirConditioner");
 
         if (service != null) {
             Action getStatusAction = service.getAction("GetStatus");
@@ -134,7 +133,7 @@ public class TemperatureSensorApp extends DeviceApp {
                 @Override
                 public void success(ActionInvocation invocation) {
                     ActionArgumentValue status = invocation.getOutput("ResultStatus");
-                    temperatureSensorViewController.updateSensorStatusUI((boolean) status.getValue());
+                    airConditionerViewController.updateStatusUI((boolean) status.getValue());
                 }
 
                 @Override
