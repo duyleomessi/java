@@ -56,16 +56,16 @@ public class AirConditionerApp extends DeviceApp {
         if (device != null) {
 //            String id = (String) idVar.getValue();
             // Only update current selected device
-            if (device.contains("AirC")) {
+            if (device.equals(currentDevice.getDevice().getDetails().getFriendlyName())) {
                 StateVariableValue status = values.get("Status");
                 StateVariableValue temp = values.get("Temperature");
                 if(status != null) {
                     System.out.println("AirC Status change " + (boolean)status.getValue());
                     airConditionerViewController.updateStatusUI((boolean) status.getValue());
                 }
-//                if(temp != null) {
+                if(temp != null) {
                     airConditionerViewController.updateTempUI(temp.getValue().toString());
-//                }
+                }
                 
             }
         }
