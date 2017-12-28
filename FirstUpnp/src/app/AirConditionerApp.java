@@ -49,17 +49,24 @@ public class AirConditionerApp extends DeviceApp {
     @Override
     public void onPropertyChangeCallbackReceived(GENASubscription subscription) {
         Map<String, StateVariableValue> values = subscription.getCurrentValues();
-        StateVariableValue idVar = values.get("Id");
-
-        if (idVar != null) {
-            String id = (String) idVar.getValue();
+//        StateVariableValue idVar = values.get("Id");
+        String device = subscription.getService().getDevice().getDetails().getFriendlyName();
+        
+        
+        if (device != null) {
+//            String id = (String) idVar.getValue();
             // Only update current selected device
-            if (id.equals(currentDevice.getId())) {
+            if (device.contains("AirC")) {
                 StateVariableValue status = values.get("Status");
                 StateVariableValue temp = values.get("Temperature");
-                System.out.println("AirC Status change " + (boolean)status.getValue());
-                airConditionerViewController.updateStatusUI((boolean) status.getValue());
-                airConditionerViewController.updateTempUI(temp.getValue().toString());
+                if(status != null) {
+                    System.out.println("AirC Status change " + (boolean)status.getValue());
+                    airConditionerViewController.updateStatusUI((boolean) status.getValue());
+                }
+//                if(temp != null) {
+                    airConditionerViewController.updateTempUI(temp.getValue().toString());
+//                }
+                
             }
         }
     }
