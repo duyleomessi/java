@@ -61,7 +61,9 @@ public class ControlPointView {
         String selectedStr = comboBox.getValue().toString();
         selectedStr = selectedStr.replace("Room", "");
         
-        app.setNewAirTemp(selectedStr, Double.parseDouble(newAirTemp.getText()));
+        if(!airTemp.getText().equals("Unavailable")) {
+            app.setNewAirTemp(selectedStr, Double.parseDouble(newAirTemp.getText()));
+        }
     }
     
     private void updateUI() {
