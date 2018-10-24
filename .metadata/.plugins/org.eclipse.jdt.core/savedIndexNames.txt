@@ -1,8 +1,0 @@
-INDEX VERSION 1.130+/home/ledinhduy/developer/java/.metadata/.plugins/org.eclipse.jdt.core
-3611264357.index
-3155180216.index
-1978137540.index
-3898769915.index
-259094482.index
-3334121857.index
-3708979120.index
